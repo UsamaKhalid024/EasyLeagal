@@ -30,7 +30,7 @@ node {
             rc = bat returnStatus: true, script: "${toolbelt}/sfdx force:org:authorize -i ${CONNECTED_APP_CONSUMER_KEY} -u ${HUB_ORG} -f ${HUB_KEY} -y debug"
 			if (rc != 0) { error 'hub org authorization failed' }
 
-			// need to pull out assigned username 
+			// need to pull out assigned username
 			rmsg = bat returnStdout: true, script: "${toolbelt}/sfdx force:org:create -f config/workspace-scratch-def.json -j -t test -y debug"
 			printf rmsg
 			def jsonSlurper = new JsonSlurperClassic()
