@@ -8,7 +8,7 @@ node {
 
     def HUB_ORG="usama@ioptime.com"
 	def jwt_key_file="usama@ioptime.com"
-    def SFDC_HOST = "https://test.salesforce.com/"
+    def SFDC_HOST = "https://login.salesforce.com/"
     def JWT_KEY_CRED_ID = "8ccb15ac-8250-4735-95c8-d560b7b3ff9a"
     def CONNECTED_APP_CONSUMER_KEY = "3MVG9G9pzCUSkzZvUX.xGKvFpuwjGYquEFgY6OX6UELIAvmQDx6YBJ6NFy67CsCZJlJvq7V5hy9W6RgiuwDEt"
 
