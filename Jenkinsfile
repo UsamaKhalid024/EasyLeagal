@@ -1,6 +1,6 @@
 #!groovy
 import groovy.json.JsonSlurperClassic
-@Library('sfdx-jenkins-shared-library')_
+
 node {
 
     def BUILD_NUMBER=env.BUILD_NUMBER
