@@ -39,9 +39,9 @@ node {
 				error 'hub org authorization failed' 
 			}
 			
-			println "---->"
-			println PATH
-			println "---->"
+			printf "---->"
+			printf PATH
+			printf "---->"
 			
 			// need to pull out assigned username
 			rmsg = bat returnStdout: true, script: "${toolbelt}/sfdx force:org:create --definitionfile config/project-scratch-def.json --json --setdefaultusername"
