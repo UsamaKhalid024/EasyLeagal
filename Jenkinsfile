@@ -16,6 +16,10 @@ node {
     println HUB_ORG
     println SFDC_HOST
     println CONNECTED_APP_CONSUMER_KEY
+	println "------"
+	println BUILD_NUMBER
+	println RUN_ARTIFACT_DIR
+	println SFDC_USERNAME
     def toolbelt = tool 'toolbelt'
 
     stage('checkout source') {
