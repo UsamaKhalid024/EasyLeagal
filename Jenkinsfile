@@ -21,7 +21,11 @@ node {
 	println RUN_ARTIFACT_DIR
 	println SFDC_USERNAME
     def toolbelt = tool 'toolbelt'
-
+	
+	environment {
+        PATH = "C:\\WINDOWS\\SYSTEM32"
+    }
+	
     stage('checkout source') {
         // when running in multi-branch job, one must issue this command
         checkout scm
@@ -30,6 +34,14 @@ node {
     withCredentials([file(credentialsId: JWT_KEY_CRED_ID, variable: 'jwt_key_file')]) {
         stage('Create Scratch Org') {
             
+			rc = bat returnStatus: true, script: "${toolbelt}/sfdx force:auth:jwt:grant --clientid ${CONNECTED_APP_CONSUMER_KEY} --username ${HUB_ORG} --jwtkeyfile ${jwt_key_file} --setdefaultdevhubusername --instanceurl ${SFDC_HOST}"
+			if (rc != 0) { 
+				error 'hub org authorization failed' 
+			}
+			
+			println "---->"
+			println PATH
+			println "---->"
 			
 			// need to pull out assigned username
 			rmsg = bat returnStdout: true, script: "${toolbelt}/sfdx force:org:create --definitionfile config/project-scratch-def.json --json --setdefaultusername"
