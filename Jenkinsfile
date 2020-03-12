@@ -23,7 +23,7 @@ node {
     def toolbelt = tool 'toolbelt'
 	
 	environment {
-        PATH = "C:\\WINDOWS\\SYSTEM32"
+        PATH = "C:\Windows\System32"
     }
 	
     stage('checkout source') {
