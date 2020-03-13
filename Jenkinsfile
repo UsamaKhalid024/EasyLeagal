@@ -1,38 +1,56 @@
-#!groovy
-import groovy.json.JsonSlurperClassic
-node {
+pipeline {  
+    agent any
+    stages {
+        stage("Build") {
+            steps {
+                echo "Building application..."   
+                bat "%ANT_HOME%/bin/ant.bat clean compile"
+            }
+        }
+        stage("Unit Tests") {
+            steps {
+                echo "Unit tests (JUnit)..."
+                echo "Mutation tests (pitest)..."
 
-    def BUILD_NUMBER=env.BUILD_NUMBER
-    def RUN_ARTIFACT_DIR="tests/${BUILD_NUMBER}"
-    def SFDC_USERNAME
-
-    def HUB_ORG=env.HUB_ORG_DH
-    def SFDC_HOST = env.SFDC_HOST_DH
-    def JWT_KEY_CRED_ID = env.JWT_CRED_ID_DH
-    def CONNECTED_APP_CONSUMER_KEY = env.CONNECTED_APP_CONSUMER_KEY_DH
-
-    println 'KEY IS' 
-    println JWT_KEY_CRED_ID
-    println HUB_ORG
-    println SFDC_HOST
-    println CONNECTED_APP_CONSUMER_KEY
-	println "------"
-	println BUILD_NUMBER
-	println RUN_ARTIFACT_DIR
-	println SFDC_USERNAME
-    def toolbelt = tool 'toolbelt'
-	def antVersion = 'Ant'
-	
-	environment {
-        PATH = "C:\\WINDOWS\\SYSTEM32"
+                bat "%ANT_HOME%/bin/ant.bat run-unit-tests"
+                bat "%ANT_HOME%/bin/ant.bat run-mutation-tests"
+            }
+        }
+        stage("Functional Test") {
+            steps {
+                echo "Selenium tests..."
+            }
+        }
+        stage("Performance Test") {
+            steps {
+                echo "JMeter tests..."
+            }
+        }
+        stage("Quality Analysis") {
+            steps {
+                echo "Running SonarQube..."
+            bat "%ANT_HOME%/bin/ant.bat run-sonarqube-analysis"
+            }
+        }
+        stage("Security Assessment") {
+            steps {
+                echo "Pen testing..."
+            }
+        }
+        stage("Approval") {
+            steps {
+                    input "Is the build OK?"
+        }
+        }
+        stage("Deploy") {
+            steps {
+                echo "Deploying to JBoss 7.2..."
+            }
+        }
     }
-	
-    stage('checkout source') {
-        // when running in multi-branch job, one must issue this command
-        checkout scm
-    }
-
-    withEnv( ["ANT_HOME=${tool antVersion}"] ) {
-		bat '%ANT_HOME%/bin/ant.bat target1 target2'
-	}
+    post {
+        always {
+        junit '/test/reports/*.xml'
+            }
+    }       
 }
