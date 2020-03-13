@@ -4,7 +4,7 @@ pipeline {
         stage("Build") {
             steps {
                 echo "Building application..."   
-                bat "C:/Usama_Khalid/apache-ant-1.10.7/bin/ant.bat clean compile"
+                bat "%ANT_HOME%/bin/ant.bat clean compile"
             }
         }
         stage("Unit Tests") {
