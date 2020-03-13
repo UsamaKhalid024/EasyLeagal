@@ -4,7 +4,7 @@
  * @Author             : ChangeMeIn@UserSettingsUnder.SFDoc
  * @Group              : 
  * @Last Modified By   : ChangeMeIn@UserSettingsUnder.SFDoc
- * @Last Modified On   : 18/12/2019, 2:08:45 pm
+ * @Last Modified On   : 13/03/2020, 12:54:47 pm
  * @Modification Log   : 
  * Ver       Date            Author      		    Modification
  * 1.0    18/12/2019   ChangeMeIn@UserSettingsUnder.SFDoc     Initial Version
@@ -16,6 +16,7 @@ public class Account_Details {
                 new Contact(FirstName = 'Usama', LastName = 'Khalid', Department = 'Software Engineering'),
                 new Contact(FirstName = 'Bilal', LastName = 'Khan', Department = 'Computer Science')
         };
+        system.debug('This is me Usama Khalid Commiting from local system');
             Insert acc;
         List<Contact> List_to_update = new List<Contact>();
         for(Contact all_contacts : acc){
