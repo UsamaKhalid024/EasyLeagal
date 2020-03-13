@@ -21,7 +21,7 @@ node {
 	println RUN_ARTIFACT_DIR
 	println SFDC_USERNAME
     def toolbelt = tool 'toolbelt'
-	def antVersion = 'Ant1.10.7'
+	def antVersion = 'Ant'
 	
 	environment {
         PATH = "C:\\WINDOWS\\SYSTEM32"
