@@ -33,10 +33,10 @@ node {
             }
             if (rc != 0) { error 'hub org authorization failed' }
 
-			println rc
-            println "======"
-            println PATH
-            println "======"
+			printf rc
+            printf "======"
+            printf PATH
+            printf "======"
 			// need to pull out assigned username
 			if (isUnix()) {
 				rmsg = sh returnStdout: true, script: "${toolbelt} force:mdapi:deploy -d manifest/. -u ${HUB_ORG}"
@@ -45,8 +45,8 @@ node {
 			}
 			  
             printf rmsg
-            println('Hello from a Job DSL script!')
-            println(rmsg)
+            printf('Hello from a Job DSL script!')
+            printf(rmsg)
         }
     }
 }
